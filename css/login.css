@@ -19,12 +19,13 @@ p.title-header
 
 div.page-content
 {
-	margin-top: 5%;
+	margin-top: 2%;
 }
+
 
 p.title-content
 {
-	font-family: "Roboto", sans-serif;
+	font-family: 'Lobster', cursive;
 	font-size: 120%;
 	line-height: 120%;
 

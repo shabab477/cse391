@@ -15,3 +15,28 @@
 		return $result;
 
 	}
+
+	function insertData($query)
+	{
+		
+		$conn = mysqli_connect(SERVER, USER, PASSWORD, DBNAME);
+		
+		if (!$conn) {
+		    die("Connection failed: " . mysqli_connect_error());
+		}
+		
+		if (mysqli_query($conn, $query)) {
+
+			mysqli_close($conn);
+
+			return true;
+		} 
+		else 
+		{
+			
+			mysqli_close($conn);
+
+			return false;			
+		}
+
+	}

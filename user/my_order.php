@@ -50,8 +50,7 @@
     <span class="mdl-layout-title">Menu</span>
 
 	 <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="cart.php"><i class="material-icons">&#xE854;</i><span class='spaces'>My Cart</span></a>
-      
+      <a class="mdl-navigation__link" href=""><i class="material-icons">&#xE854;</i><span class='spaces'>My Cart</span></a>
       <a class="mdl-navigation__link" href=""><i class="material-icons">&#xE916;</i><span class='spaces'>Delivery Report</span></a>
       
     </nav>
@@ -150,8 +149,6 @@
       <div class="row">
         <div class="form-group">
         
-
-          
 
           <div class="col-sm-4 col-sm-offset-4">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

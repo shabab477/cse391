@@ -2,7 +2,7 @@
 
 
 	define("SERVER", "localhost");
-	define("DBNAME", "mechanic");
+	define("DBNAME", "accessories");
 	define("USER", "root");
 	define("PASSWORD", "root");
 	

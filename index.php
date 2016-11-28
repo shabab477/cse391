@@ -3,20 +3,25 @@
 <head>
 	<title></title>
 
+  <?php
+
+    session_start();
+  ?>
+
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
 
 	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="js/jquery.min.js"></script>
 
 	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 
-  <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+  <link href="css/lobster.css" rel="stylesheet">
 
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.pink-red.min.css" />
-	<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+	<link rel="stylesheet" href="css/icon.css">
+	<link rel="stylesheet" href="css/material.pink-red.min.css" />
+	<script defer src="js/material.min.js"></script>
   <link rel="stylesheet" href="css/right_drawer.css" />
   <link rel="stylesheet" href="css/boot_card.css" />
 	<style>
@@ -43,23 +48,36 @@
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
       <!-- Title -->
-      <span class="mdl-layout-title">Welcome</span>
+      <span class="mdl-layout-title">
+      
+    <?php
+      if(isset($_SESSION['u_name']))
+      {
+        echo $_SESSION['u_name']; 
+      }
+      else
+      {
+        echo "Welcome";
+      }
+    ?>
+      </span>
 
       <!--spacer to bring the rest elements after it to the right -->
       <div class="mdl-layout-spacer"></div>
-
-      <div class="material-icons" id="notif">&#xE853;</div>
-      <!--TODO: Sign up and sign in -->
-     <!--  <nav class="mdl-navigation">
-         <a class="mdl-navigation__link" href="" style="color:gray">Home</a>
-         <a class="mdl-navigation__link" href="" style="color:gray">About</a>      
-      </nav> -->
+      <div id="tt4" class="icon material-icons">search</div>
+      <div class="mdl-tooltip" for="tt4">
+      Search<br> in current tab
+      </div>
+      <div class="material-icons" id="notif" >&#xE853;</div>
+      
     </div>
+
+    
     <!-- Tabs -->
     <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-      <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Men's Accessories</a>
-      <a href="#fixed-tab-2" class="mdl-layout__tab">Women's Accessories</a>
-      <a href="#fixed-tab-3" class="mdl-layout__tab">Children's Accessories</a>
+      <a href="#fixed-tab-1" id='men' class="mdl-layout__tab is-active">Men's Accessories</a>
+      <a href="#fixed-tab-2" id='women' class="mdl-layout__tab">Women's Accessories</a>
+      <a href="#fixed-tab-3" id='child' class="mdl-layout__tab">Children's Accessories</a>
     </div>
   </header>
 
@@ -68,9 +86,9 @@
     <span class="mdl-layout-title">Menu</span>
 
 	 <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href=""><i class="material-icons">&#xE854;</i><span class='spaces'>My Cart</span></a>
+      <a class="mdl-navigation__link" disabled='true' href="user/cart.php"><i class="material-icons">&#xE854;</i><span class='spaces'>My Cart</span></a>
       <a class="mdl-navigation__link" href=""><i class="material-icons">&#xE87D;</i><span class='spaces'>Archives</span></a>
-      <a class="mdl-navigation__link" href=""><i class="material-icons">&#xE916;</i><span class='spaces'>Delivery Report</span></a>
+      <a class="mdl-navigation__link" href="user/delivery.php"><i class="material-icons">&#xE916;</i><span class='spaces'>Delivery Report</span></a>
       
     </nav>
 
@@ -89,7 +107,107 @@
 
   </div>
 
+
+
+
   <main class="mdl-layout__content">
+
+   <div class="container-fluid pop_up_container">
+
+      <form>
+
+      <div class="row">
+        <div class="form-group">
+          <div class="col-sm-2">
+            <label>
+                Max Price:<span id='max_val'>2500</span>
+            </label>
+            
+          </div>
+          <div class="col-sm-10">  
+            <input onchange='showMax(this.value)' class="mdl-slider mdl-js-slider" type="range"
+  min="0" max="10000" value="2500" tabindex="0">
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          
+          <div class="col-sm-2">
+            <label>
+                Min Price:<span id='min_val'>0</span>
+            </label>
+            
+          </div>
+          <div class="col-sm-10">  
+            <input class="mdl-slider mdl-js-slider" type="range"
+  min="0" max="10000" onchange="showMin(this.value)" value="25" tabindex="0">
+          </div>
+
+        </div>
+
+
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+        
+
+          
+
+          <div class="col-sm-10 col-sm-offset-1">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="keyword">
+              <label class="mdl-textfield__label" for="keyword"><i class="material-icons">search</i></label>
+              
+            </div>        
+          </div>
+
+
+
+
+        </div>
+        
+        
+      </div>
+
+      
+
+
+      </form>
+      
+      <div class="row">
+        <div class="col-sm-offset-1">
+
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick='initFind()' id='query'>
+            Find Result
+          </button>
+          
+        </div>
+        
+        
+      </div>
+
+
+      <div class="row" id='cancel_butt' style='margin-top: 15px'>
+        <div class="col-sm-offset-1">
+
+          <button id="cancel" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            Cancel
+          </button>
+          
+        </div>
+        
+        
+      </div>
+
+
+    </div>
     <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
       <div class="page-content">
       <!-- Your content goes here -->
